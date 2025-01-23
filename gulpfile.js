@@ -277,6 +277,13 @@ gulp.task('build', gulp.parallel('js', 'css', 'plugins'))
 
 gulp.task('package', gulp.series(async () => {
 
+    const buildPath = './build';
+
+    // Remove the build folder if it exists
+    if (fs.existsSync(buildPath)) {
+        fs.rmSync(buildPath, { recursive: true, force: true });
+    }
+
     let dirs = [
         './index.html',
         './dist/**',
@@ -289,7 +296,9 @@ gulp.task('package', gulp.series(async () => {
     if (fs.existsSync('./slides')) dirs.push('./slides/**');
 
     return gulp.src( dirs, { base: './', encoding: false } )
-    .pipe(zip('reveal-js-presentation.zip')).pipe(gulp.dest('./'))
+        .pipe(gulp.dest('./build'));
+    // return gulp.src( dirs, { base: './', encoding: false } )
+    // .pipe(zip('reveal-js-presentation.zip')).pipe(gulp.dest('./'))
 
 }))
 

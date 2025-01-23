@@ -10,7 +10,9 @@
   "scripts": {
     "test": "gulp test",
     "start": "gulp serve",
-    "build": "gulp build"
+    "build": "gulp build",
+    "package": "gulp package",
+    "deploy": "npm run build && npm run package && gh-pages -d build --cname \"veremjovs.id.lv\""
   },
   "author": {
     "name": "Hakim El Hattab",
